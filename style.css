@@ -333,11 +333,19 @@ footer {
     70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
     100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
+.nav-links li a {
+    font-weight: 800;
+    color: #000000;
+    text-transform: uppercase;
+    text-decoration: none;
+}
 
 
 
 /* Mobile Optimization - Exact Fix for Khushi Construction */
 @media (max-width: 768px) {
+   
+    
 
     /* 1. Navbar Links Fix (Home, Services, Contact) */
     .nav-links { 
@@ -393,3 +401,18 @@ footer {
     }
 
 } 
+
+/* Button ko wapas blue karne ke liye */
+.nav-links li a.btn-login {
+    background-color: #1e2f67 !important; 
+    color: #ffffff !important;           
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    text-transform: uppercase;
+}
+
+/* Hover par orange hone se rokne ke liye */
+.nav-links li a.btn-login:hover {
+    background-color: #15224e !important;
+    color: #ffffff !important;
+}
