@@ -338,16 +338,30 @@ footer {
 
 /* Mobile Optimization */
 @media (max-width: 768px) {
-    /* Jahan aapne stats rakhe hain us container ki class yahan likhein */
+    /* --- Navbar Fix Start --- */
+    nav, .navbar, .nav-links, .navbar-nav { 
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+
+    nav a, .nav-link {
+        font-size: 12px !important; /* Text size chota karega */
+        padding: 4px 8px !important;
+    }
+    /* --- Navbar Fix End --- */
+
+    /* Aapka purana Stats wala code yahan se shuru hota hai */
     .stats-container, .row, .counter-section { 
         display: flex !important;
-        flex-wrap: wrap !important; /* Isse 100 niche aa jayega */
+        flex-wrap: wrap !important;
         justify-content: center !important;
         gap: 20px;
     }
 
     .stat-item, .col-md-3 {
-        flex: 1 1 40% !important; /* Ek line mein 2 items dikhayega */
+        flex: 1 1 40% !important;
         text-align: center;
         margin-bottom: 20px;
     }
