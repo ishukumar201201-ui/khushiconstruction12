@@ -336,33 +336,47 @@ footer {
 
 
 
-/* Mobile Optimization */
+/* Mobile Optimization - Exact Fix for Khushi Construction */
 @media (max-width: 768px) {
-    /* --- Navbar Fix Start --- */
-    nav, .navbar, .nav-links, .navbar-nav { 
+
+    /* 1. Navbar Links Fix (Home, Services, Contact) */
+    .nav-links { 
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 8px !important;
+        gap: 10px !important;
+        padding: 10px 0 !important;
+        list-style: none;
     }
 
-    nav a, .nav-link {
-        font-size: 12px !important; /* Text size chota karega */
-        padding: 4px 8px !important;
+    .nav-links li a {
+        font-size: 14px !important;
+        padding: 5px 8px !important;
     }
-    /* --- Navbar Fix End --- */
 
-    /* Aapka purana Stats wala code yahan se shuru hota hai */
-    .stats-container, .row, .counter-section { 
+    /* 2. Login Button Fix */
+    .btn-login {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+        display: inline-block;
+    }
+
+    /* 3. Stats Section Fix (100+ Projects etc.) */
+    .stats-container { 
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 20px;
+        gap: 20px !important;
     }
 
-    .stat-item, .col-md-3 {
-        flex: 1 1 40% !important;
-        text-align: center;
-        margin-bottom: 20px;
+    .stat-item {
+        flex: 1 1 40% !important; /* Mobile par ek line mein 2 dikhayega */
+        text-align: center !important;
+        margin-bottom: 15px;
+    }
+
+    /* 4. Hero Section Text Fix */
+    .hero-content h1 {
+        font-size: 24px !important; /* Mobile par heading choti karega */
     }
 }
