@@ -1,4 +1,4 @@
-/* --- 1. GLOBAL SETTINGS --- */
+/* --- 1. GLOBAL & DARK MODE --- */
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +9,7 @@
 body {
     background-color: #f9f9f9;
     color: #333;
-    transition: 0.4s;
+    transition: 0.4s ease;
     overflow-x: hidden;
 }
 
@@ -18,7 +18,7 @@ body.dark-mode {
     color: #ffffff !important;
 }
 
-/* --- 2. NAVBAR FIX --- */
+/* --- 2. NAVBAR & THEME SWITCH FIX --- */
 header {
     background: #fff;
     padding: 15px 10%;
@@ -30,15 +30,80 @@ header {
 
 body.dark-mode header { background-color: #1a1a1a !important; }
 
-nav { display: flex; justify-content: space-between; align-items: center; }
+nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
 
-.logo { font-size: 24px; font-weight: 700; color: #1a2a6c; }
-.logo span { color: #f39c12; }
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
 
-.nav-links { list-style: none; display: flex; align-items: center; }
-.nav-links li { margin-left: 25px; }
-.nav-links a { text-decoration: none; color: #333; font-weight: 600; }
-body.dark-mode .nav-links a { color: #fff !important; }
+/* --- DARK MODE TOGGLE (IMAGE STYLE) --- */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 28px;
+    position: relative;
+    width: 60px; /* Thoda lamba toggle waisa hi dikhne ke liye */
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #333; /* Default dark background */
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+/* Safed wala gol circle */
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 20px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 20px;
+    border-radius: 50%;
+    /* Moon ka icon dikhane ke liye (Optional styling) */
+    box-shadow: inset -3px -2px 0px 0px #333; 
+}
+
+/* Jab ON ho (Dark Mode) */
+input:checked + .slider {
+    background-color: #f39c12; /* Blue ya orange jo aapko pasand ho */
+}
+
+input:checked + .slider:before {
+    transform: translateX(32px);
+    box-shadow: none; /* Light mode mein moon icon hat jayega */
+    background-color: #fff;
+}
+
+/* Dark mode label text styling */
+.mode-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 
 /* --- 3. HERO SECTION FIX --- */
 .hero {
@@ -51,7 +116,7 @@ body.dark-mode .nav-links a { color: #fff !important; }
     color: #fff;
 }
 
-.hero h1 { font-size: 55px; margin-bottom: 20px; }
+.hero h1 { font-size: clamp(30px, 5vw, 55px); margin-bottom: 20px; }
 
 .cta-btn {
     display: inline-block;
@@ -62,63 +127,91 @@ body.dark-mode .nav-links a { color: #fff !important; }
     font-weight: 800;
     border-radius: 50px;
     margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
+    transition: 0.3s;
 }
 
-/* --- 4. PREMIUM LOGIN PAGE (GLASSMORPHISM) FIX --- */
+.cta-btn:hover {
+    transform: translateY(-3px);
+    background: #fff !important;
+}
+
+/* --- 4. PREMIUM LOGIN PAGE (FIXED STRUCTURE) --- */
 .login-page-body {
     background: linear-gradient(135deg, #1a2a6c, #b21f1f);
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
-.glass-login-box {
+.ultra-glass-box {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 40px;
-    border-radius: 25px;
-    width: 100%;
+    padding: 45px;
+    border-radius: 30px;
+    width: 90%;
     max-width: 400px;
     text-align: center;
     color: #fff;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3);
 }
 
-.glass-login-box h2 { margin-bottom: 20px; font-size: 2rem; }
+.glass-login-box h2 { margin-bottom: 25px; font-size: 2.2rem; font-weight: 700; }
 
 .input-field {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
+    padding: 14px;
+    margin: 12px 0;
+    border: 1px solid rgba(255,255,255,0.1);
     background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    border-radius: 12px;
     color: #fff;
     outline: none;
+    font-size: 1rem;
 }
 
-.input-field::placeholder { color: #ddd; }
+.input-field::placeholder { color: rgba(255,255,255,0.7); }
 
 .login-submit-btn {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     background: #ffcc00;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     color: #000;
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 1.1rem;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 25px;
+    transition: 0.3s;
 }
 
-/* --- 5. STATS SECTION FIX --- */
-.stats-section { padding: 60px 10%; background: #f4f7ff; text-align: center; }
-.stats-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.stat-item {
-    background: #fff; padding: 30px; border-radius: 20px; width: 220px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 5px solid #1a2a6c;
+.login-submit-btn:hover {
+    background: #fff;
+    transform: scale(1.02);
 }
-.stat-number { font-size: 2.5rem; font-weight: 800; color: #1a2a6c; display: block; }
+
+/* --- 5. STATS SECTION --- */
+.stats-section { padding: 80px 10%; background: #f4f7ff; text-align: center; }
+.stats-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+
+.stat-item {
+    background: #fff; 
+    padding: 40px; 
+    border-radius: 25px; 
+    width: 240px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05); 
+    border-bottom: 6px solid #1a2a6c;
+    transition: 0.3s;
+}
+
+.stat-item:hover { transform: translateY(-10px); }
+
+body.dark-mode .stat-item { background: #1e1e1e; border-bottom-color: #f39c12; }
+
+.stat-number { font-size: 3rem; font-weight: 800; color: #1a2a6c; display: block; }
+body.dark-mode .stat-number { color: #f39c12; }

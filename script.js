@@ -77,3 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --- DARK MODE LOGIC ---
+const checkbox = document.getElementById('checkbox');
+
+// Ye check karega ki button click hua ya nahi
+if (checkbox) {
+    checkbox.addEventListener('change', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        // Optional: User ki preference save karne ke liye
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
+}
+
+// Page load hote hi purana theme apply karne ke liye
+window.onload = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if(checkbox) checkbox.checked = true;
+    }
+};
