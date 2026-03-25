@@ -3,53 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KHUSHI Construction | Engineering Excellence</title>
+    <title>Khushi Construction | Engineering Excellence</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <nav class="container">
+        <nav class="navbar">
             <div class="logo">KHUSHI <span>CONSTRUCTION</span></div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li class="nav-right">
-                    <div class="mode-toggle">
-                        <label class="switch" for="checkbox">
-                            <input type="checkbox" id="checkbox" />
-                            <div class="slider round">
-                                <i class="fas fa-moon"></i>
-                                <i class="fas fa-sun"></i>
-                            </div>
-                        </label>
-                    </div>
-                    <a href="login.html" class="btn-login">Client Login</a>
+                <li><a href="#contact">Contact</a></li>
+                <li class="nav-extra">
+                    <label class="theme-switch">
+                        <input type="checkbox" id="checkbox">
+                        <span class="slider round">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </span>
+                    </label>
+                    <a href="login.html" class="login-btn">Client Portal</a>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <h1>BUILDING THE FUTURE</h1>
-                <p>Expert Engineering Solutions for Modern Infrastructure</p>
-                <div class="hero-btns">
-                    <a href="#projects" class="btn-primary">Our Projects</a>
-                    <a href="#contact" class="btn-secondary">Get a Quote</a>
-                </div>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>BUILDING THE FUTURE</h1>
+            <p>Expert Engineering Solutions for Modern Infrastructure in Meerut.</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn-main">View Projects</a>
+                <a href="#contact" class="btn-sub">Get A Quote</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="stats-container">
-            <div class="stat-box"><h2>25+</h2><p>Years Experience</p></div>
-            <div class="stat-box"><h2>500+</h2><p>Projects Done</p></div>
-            <div class="stat-box"><h2>100%</h2><p>Safety Record</p></div>
-        </section>
-    </main>
+    <section class="stats">
+        <div class="stat-card"><h3>25+</h3><p>Years Experience</p></div>
+        <div class="stat-card"><h3>500+</h3><p>Projects Done</p></div>
+        <div class="stat-card"><h3>100%</h3><p>Safety Record</p></div>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="section-title">Our Expertise</h2>
+        <div class="service-grid">
+            <div class="s-card"><i class="fas fa-hard-hat"></i><h4>Civil Engineering</h4><p>High-quality structural designs and implementation.</p></div>
+            <div class="s-card"><i class="fas fa-building"></i><h4>Real Estate</h4><p>Premium residential and commercial complexes.</p></div>
+            <div class="s-card"><i class="fas fa-industry"></i><h4>Industrial Projects</h4><p>Large scale factory and warehouse constructions.</p></div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2 class="section-title">Recent Work</h2>
+        <div class="project-grid">
+            <div class="p-item"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=500" alt="Work"><span>Smart City Meerut</span></div>
+            <div class="p-item"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=500" alt="Work"><span>Industrial Hub</span></div>
+            <div class="p-item"><img src="https://images.unsplash.com/photo-1590644365607-1c5a519a7a37?q=80&w=500" alt="Work"><span>Luxury Residency</span></div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Let's Talk!</h2>
+                <p><i class="fas fa-map-marker-alt"></i> Meerut, Uttar Pradesh</p>
+                <p><i class="fas fa-phone"></i> +91 98XXX XXXXX</p>
+                <p><i class="fas fa-envelope"></i> info@khushiconstruction.com</p>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <textarea placeholder="Tell us about your project" rows="5"></textarea>
+                <button type="submit" class="btn-main">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Khushi Construction. All Rights Reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
