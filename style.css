@@ -440,3 +440,86 @@ body.dark-mode .service-box {
     color: white !important;
     border: 1px solid #333 !important;
 }
+
+/* --- PREMIUM DARK MODE SWITCH STYLING --- */
+
+/* Poore switch ka container */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  margin-right: 15px; /* Navbar mein space ke liye */
+}
+
+/* Chhota text 'Light' / 'Dark' (optional, agar chahiye toh) */
+.theme-switch-label {
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333; /* Light mode mein text color */
+}
+body.dark-mode .theme-switch-label {
+  color: #fff; /* Dark mode mein text color white */
+}
+
+/* Asli switch toggle area */
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+/* Chhupa hua checkbox input */
+.theme-switch input {
+  display:none;
+}
+
+/* Switch ka background slider track */
+.slider {
+  background-color: #ccc; /* Default (Light) track color */
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+/* Gol knob (jo move karega) */
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px; /* Icon size */
+}
+
+/* Knob ke andar initial (Light) icon ☀️ */
+.slider:before {
+  content: "☀️";
+}
+
+/* Jab checkbox checked ho (Dark Mode ON) - Track color change */
+input:checked + .slider {
+  background-color: #3f51b5; /* Premium Blue track color - aap change kar sakte hain */
+}
+
+/* Knob move karega right side */
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Knob ke andar ka icon change 🌙 jab move ho jaye */
+input:checked + .slider:before {
+  content: "🌙";
+}

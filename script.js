@@ -60,19 +60,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Dark Mode Toggle Logic
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
+// --- PREMIUM DARK MODE SWITCH LOGIC ---
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        
-        // Icon change karne ke liye
-        if (document.body.classList.contains('dark-mode')) {
-            themeIcon.textContent = '☀️'; // Suraj icon
-        } else {
-            themeIcon.textContent = '🌙'; // Chand icon
-        }
-    });
+// Naye classes ke hisaab se elements select karein
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const currentTheme = localStorage.getItem('theme'); // Optional: user preference save karne ke liye
+
+// Pehle se set preference check karein (agar save ki ho)
+if (currentTheme) {
+    document.body.classList.add(currentTheme);
+    if (currentTheme === 'dark-mode') {
+        toggleSwitch.checked = true;
+    }
 }
+
+// Switch change hone par class toggle karein
+toggleSwitch.addEventListener('change', function(e) {
+    if (e.target.checked) {
+        document.body.classList.add('dark-mode');
+        // Icon update styling se handle ho raha hai, JS mein zaroorat nahi
+        // Optional: Preference save karein
+        // localStorage.setItem('theme', 'dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+        // Optional: Preference remove karein
+        // localStorage.setItem('theme', 'light-mode');
+    }
+});
