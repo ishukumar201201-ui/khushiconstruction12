@@ -59,3 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Dark Mode Toggle Logic
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        
+        // Icon change karne ke liye
+        if (document.body.classList.contains('dark-mode')) {
+            themeIcon.textContent = '☀️'; // Suraj icon
+        } else {
+            themeIcon.textContent = '🌙'; // Chand icon
+        }
+    });
+}
