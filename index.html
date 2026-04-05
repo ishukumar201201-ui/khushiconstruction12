@@ -3,286 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyorate | Exclusive Mobile & Fashion Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Vyorate | Premium Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #0071e3; /* Apple style blue */
-            --dark: #121212;
-            --light: #f5f5f7;
-            --accent: #ff9f0a;
-            --glass: rgba(255, 255, 255, 0.8);
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        
+        body { background: #000; color: #fff; overflow-x: hidden; }
+
+        /* --- Canvas for Animation --- */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Background mein rahega */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
-        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; }
+        /* --- Overlay UI --- */
+        .content {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2); /* halka sa dark overlay */
+        }
 
-        /* --- Header & Nav --- */
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #fff, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 30px; }
+
+        .btn-premium {
+            padding: 15px 40px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.4);
+        }
+
         header {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: var(--glass); backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            position: absolute;
+            top: 0; width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        nav {
-            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo { font-size: 28px; font-weight: 800; color: var(--primary); letter-spacing: -1px; cursor: pointer; }
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px; cursor: pointer; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-icons { display: flex; gap: 20px; font-size: 20px; cursor: pointer; }
-        .cart-count { background: var(--primary); color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: 10px; }
 
-        /* --- Page Layout --- */
-        .page { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.5s ease-in-out; }
-        .active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- Hero Section --- */
-        .hero {
-            height: 500px; border-radius: 30px; margin: 20px;
-            background: linear-gradient(135deg, #000 0%, #333 100%);
-            display: flex; align-items: center; justify-content: center;
-            color: white; text-align: center; position: relative; overflow: hidden;
-        }
-        .hero-content h1 { font-size: 60px; font-weight: 800; margin-bottom: 15px; }
-        .hero-content p { font-size: 20px; opacity: 0.8; margin-bottom: 25px; }
-        .btn-main {
-            background: var(--primary); color: white; padding: 15px 40px;
-            border-radius: 30px; text-decoration: none; font-weight: 600; border: none; cursor: pointer;
-        }
-        .btn-main:hover { background: #0056b3; transform: scale(1.05); }
-
-        /* --- Product Grid --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 30px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        .product-card {
-            background: white; border-radius: 20px; padding: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;
-        }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .product-img { width: 100%; height: 200px; border-radius: 15px; background: #eee; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-        .product-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-        .product-price { color: var(--primary); font-weight: 700; font-size: 20px; margin-bottom: 15px; }
-
-        /* --- Cart Panel --- */
-        .cart-panel {
-            position: fixed; right: -400px; top: 0; width: 400px; height: 100%;
-            background: white; z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-            padding: 30px; display: flex; flex-direction: column;
-        }
-        .cart-panel.open { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-
-        /* --- Footer --- */
-        footer { background: white; padding: 60px 20px; border-top: 1px solid #eee; margin-top: 50px; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-col h4 { margin-bottom: 20px; font-weight: 700; }
-        .footer-col p { color: #666; line-height: 1.8; font-size: 14px; }
-
-        /* --- WhatsApp Floating Button --- */
-        .whatsapp-btn {
-            position: fixed; bottom: 30px; right: 30px;
-            background: #25d366; color: white; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000;
-        }
+        .logo { font-size: 24px; font-weight: 800; }
     </style>
 </head>
 <body>
 
-    <div class="whatsapp-btn" onclick="window.open('https://wa.me/91XXXXXXXXXX')">
-        <i class="fab fa-whatsapp"></i>
-    </div>
+    <canvas id="bg-canvas"></canvas>
 
     <header>
-        <nav>
-            <div class="logo" onclick="navigateTo('home-page')">VYORATE</div>
-            <div class="nav-links">
-                <a onclick="navigateTo('home-page')">Home</a>
-                <a onclick="navigateTo('shop-page')">Store</a>
-                <a onclick="navigateTo('repair-page')">Repairs</a>
-                <a onclick="navigateTo('login-page')">Account</a>
-            </div>
-            <div class="nav-icons">
-                <i class="fas fa-search"></i>
-                <i class="fas fa-shopping-bag" onclick="toggleCart()" style="position: relative;">
-                    <span class="cart-count" id="cart-count">0</span>
-                </i>
-            </div>
-        </nav>
+        <div class="logo">VYORATE</div>
+        <div style="display:flex; gap:30px; font-weight: 300;">
+            <span>Store</span>
+            <span>Repairs</span>
+            <span>Login</span>
+        </div>
     </header>
 
-    <div id="home-page" class="page active">
-        <div class="hero">
-            <div class="hero-content">
-                <h1>iPhone 15 Pro</h1>
-                <p>Titanium. So strong. So light. So Pro.</p>
-                <button class="btn-main" onclick="navigateTo('shop-page')">Order Now</button>
-            </div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">Latest Arrivals</h2>
-            <div class="grid" id="featured-products"></div>
-        </div>
-    </div>
+    <main class="content">
+        <h1>Welcome to Vyorate</h1>
+        <p>Premium Mobile & Accessories. Redefined.</p>
+        <button class="btn-premium">Explore Collection</button>
+    </main>
 
-    <div id="shop-page" class="page">
-        <div class="container">
-            <h2 class="section-title">Our Full Catalog</h2>
-            <div class="grid" id="all-products"></div>
-        </div>
-    </div>
-
-    <div id="repair-page" class="page">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Certified Repair Service</h2>
-            <p style="max-width: 600px; margin: 0 auto 40px;">Broken screen? Battery issues? Our experts fix everything in under 2 hours.</p>
-            <div class="grid">
-                <div class="product-card">
-                    <div class="product-img"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Screen Replacement</h3>
-                    <p>Starting from ₹1,999</p>
-                    <button class="btn-main" style="margin-top: 10px;">Book Slot</button>
-                </div>
-                <div class="product-card">
-                    <div class="product-img"><i class="fas fa-battery-full"></i></div>
-                    <h3>Battery Change</h3>
-                    <p>Starting from ₹999</p>
-                    <button class="btn-main" style="margin-top: 10px;">Book Slot</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="login-page" class="page">
-        <div class="container" style="max-width: 400px; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
-            <h2 style="margin-bottom: 20px;">Sign In</h2>
-            <input type="email" placeholder="Email Address" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <input type="password" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
-            <button class="btn-main" style="width: 100%;" onclick="alert('Logged in Successfully!')">Login to Vyorate</button>
-            <p style="margin-top: 20px; text-align: center; font-size: 14px; color: #666;">New here? <a href="#" style="color: var(--primary);">Create Account</a></p>
-        </div>
-    </div>
-
-    <div id="cart-panel" class="cart-panel">
-        <div class="cart-header">
-            <h3>Your Bag</h3>
-            <i class="fas fa-times" style="font-size: 24px; cursor: pointer;" onclick="toggleCart()"></i>
-        </div>
-        <div id="cart-items" style="flex: 1; overflow-y: auto;">
-            <p style="color: #999; text-align: center;">No items yet.</p>
-        </div>
-        <div style="padding-top: 20px; border-top: 1px solid #eee;">
-            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 20px; margin-bottom: 20px;">
-                <span>Total</span>
-                <span id="cart-total">₹ 0</span>
-            </div>
-            <button class="btn-main" style="width: 100%;" onclick="alert('Checkout integration requires a payment gateway.')">Checkout</button>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <div class="logo">VYORATE</div>
-                <p>The next generation of mobile shopping. Premium products, unmatched service.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Shop</h4>
-                <p>Smartphones<br>Accessories<br>Refurbished<br>Repair Service</p>
-            </div>
-            <div class="footer-col">
-                <h4>Support</h4>
-                <p>Help Center<br>Track Order<br>Terms of Service<br>Privacy Policy</p>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 50px; opacity: 0.5; font-size: 13px;">&copy; 2026 Vyorate Fashion. All Rights Reserved.</p>
-    </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
     <script>
-        const products = [
-            { id: 1, name: "iPhone 15 Pro Max", price: 149900, icon: "📱", cat: "featured" },
-            { id: 2, name: "Samsung S24 Ultra", price: 129999, icon: "📲", cat: "featured" },
-            { id: 3, name: "AirPods Pro Gen 2", price: 24900, icon: "🎧", cat: "featured" },
-            { id: 4, name: "MagSafe Leather Case", price: 4999, icon: "💼", cat: "all" },
-            { id: 5, name: "Fast Charger 45W", price: 2999, icon: "🔌", cat: "all" },
-            { id: 6, name: "OnePlus 12", price: 64999, icon: "📱", cat: "all" }
-        ];
+        // --- 3D Wave Animation Script ---
+        const canvas = document.querySelector('#bg-canvas');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
-        let cart = [];
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
 
-        function navigateTo(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0,0);
-        }
+        // Create Geometry
+        const geometry = new THREE.PlaneGeometry(15, 10, 50, 50);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x444444,
+            wireframe: true, // Wavy line look dene ke liye
+            transparent: true,
+            opacity: 0.3
+        });
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+        mesh.rotation.x = -1;
 
-        function toggleCart() {
-            document.getElementById('cart-panel').classList.toggle('open');
-        }
+        // Animation Loop
+        const clock = new THREE.Clock();
 
-        function loadProducts() {
-            const featuredGrid = document.getElementById('featured-products');
-            const allGrid = document.getElementById('all-products');
-
-            products.forEach(p => {
-                const card = `
-                    <div class="product-card">
-                        <div class="product-img">${p.icon}</div>
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-price">₹${p.price.toLocaleString()}</div>
-                        <button class="btn-main" onclick="addToCart(${p.id})">Add to Bag</button>
-                    </div>
-                `;
-                if(p.cat === 'featured') featuredGrid.innerHTML += card;
-                allGrid.innerHTML += card;
-            });
-        }
-
-        function addToCart(id) {
-            const prod = products.find(p => p.id === id);
-            cart.push(prod);
-            updateCartUI();
-            if(!document.getElementById('cart-panel').classList.contains('open')) toggleCart();
-        }
-
-        function updateCartUI() {
-            const container = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cart-total');
-            const countEl = document.getElementById('cart-count');
+        function animate() {
+            const t = clock.getElapsedTime();
             
-            container.innerHTML = "";
-            let total = 0;
+            // Verices ko hilane ke liye taki "Wavy" effect aaye
+            const { position } = geometry.attributes;
+            for (let i = 0; i < position.count; i++) {
+                const x = position.getX(i);
+                const y = position.getY(i);
+                
+                // Sin wave logic
+                const wave1 = Math.sin(x + t) * 0.5;
+                const wave2 = Math.sin(y + t * 0.8) * 0.5;
+                
+                position.setZ(i, wave1 + wave2);
+            }
+            position.needsUpdate = true;
             
-            cart.forEach((item, idx) => {
-                total += item.price;
-                container.innerHTML += `
-                    <div class="cart-item">
-                        <div>
-                            <strong>${item.name}</strong><br>
-                            <span style="color:var(--primary)">₹${item.price.toLocaleString()}</span>
-                        </div>
-                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeItem(${idx})"></i>
-                    </div>
-                `;
-            });
+            mesh.rotation.z = t * 0.05; // Dhire se rotate bhi karega
 
-            totalEl.innerText = `₹${total.toLocaleString()}`;
-            countEl.innerText = cart.length;
-            if(cart.length === 0) container.innerHTML = '<p style="color: #999; text-align: center;">No items yet.</p>';
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
         }
 
-        function removeItem(idx) {
-            cart.splice(idx, 1);
-            updateCartUI();
-        }
+        animate();
 
-        window.onload = loadProducts;
+        // Responsive handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
     </script>
 </body>
 </html>
