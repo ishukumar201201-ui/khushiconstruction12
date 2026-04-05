@@ -21,6 +21,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* Smooth Scrolling add kiya hai */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--light-bg);
             color: var(--text-dark);
@@ -70,6 +75,7 @@
             width: 33%;
             text-align: center;
             color: var(--accent-gold);
+            cursor: pointer;
         }
 
         .search-box {
@@ -126,6 +132,7 @@
             text-transform: uppercase;
             font-size: 0.9em;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .category-nav a:hover {
@@ -168,6 +175,8 @@
             font-weight: bold;
             border-radius: 30px;
             transition: transform 0.3s;
+            cursor: pointer;
+            border: none;
         }
 
         .hero-btn:hover {
@@ -246,6 +255,7 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             transition: transform 0.3s;
+            position: relative;
         }
 
         .product-card:hover {
@@ -254,7 +264,7 @@
         }
 
         .product-image {
-            height: 300px;
+            height: 250px;
             background-color: #eee;
             display: flex;
             justify-content: center;
@@ -285,6 +295,25 @@
             font-weight: bold;
             color: var(--primary-dark);
             font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        /* Add to Cart Button on Products */
+        .add-to-cart-btn {
+            background-color: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
         }
 
         /* Promo Banner Middle */
@@ -326,6 +355,7 @@
             text-decoration: none;
             margin-bottom: 10px;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
         .footer-col a:hover {
@@ -357,75 +387,75 @@
 
     <header>
         <div class="header-left">
-            <button class="icon-btn"><i class="fas fa-bars"></i></button>
+            <button class="icon-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
             <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for luxury...">
+                <i class="fas fa-search" onclick="performSearch()" style="cursor: pointer;"></i>
+                <input type="text" id="searchInput" placeholder="Search for luxury...">
             </div>
         </div>
         
-        <div class="logo">
+        <div class="logo" onclick="window.scrollTo(0,0)">
             VYORATE
         </div>
 
         <div class="header-right">
-            <button class="icon-btn"><i class="far fa-user"></i></button>
-            <button class="icon-btn"><i class="far fa-heart"></i></button>
-            <button class="icon-btn"><i class="fas fa-shopping-bag"></i></button>
+            <button class="icon-btn" onclick="openProfile()"><i class="far fa-user"></i></button>
+            <button class="icon-btn" onclick="openWishlist()"><i class="far fa-heart"></i></button>
+            <button class="icon-btn" onclick="openCart()"><i class="fas fa-shopping-bag"></i></button>
         </div>
     </header>
 
     <div class="category-nav">
-        <a href="#">New Arrivals</a>
-        <a href="#">Men</a>
-        <a href="#">Women</a>
-        <a href="#">Kids</a>
-        <a href="#">Footwear</a>
-        <a href="#">Accessories</a>
-        <a href="#">Sale</a>
+        <a href="#trending">New Arrivals</a>
+        <a href="#categories">Men</a>
+        <a href="#categories">Women</a>
+        <a href="#categories">Kids</a>
+        <a href="#trending">Footwear</a>
+        <a href="#categories">Accessories</a>
+        <a href="#promo">Sale</a>
     </div>
 
     <section class="hero">
         <h1>The Summer Elite Collection</h1>
         <p>Buy 1 Get 1 Free on Exclusive Merch</p>
-        <a href="#" class="hero-btn">Explore Now</a>
+        <button class="hero-btn" onclick="document.getElementById('categories').scrollIntoView();">Explore Now</button>
     </section>
 
-    <section class="shop-by-category">
+    <section id="categories" class="shop-by-category">
         <h2 class="section-title">Explore Categories</h2>
         <div class="category-circles">
-            <div class="circle-item">
+            <div class="circle-item" onclick="categoryClick('Men\'s Wear')">
                 <div class="circle-img"><i class="fas fa-tshirt"></i></div>
                 <h4>Men's Wear</h4>
             </div>
-            <div class="circle-item">
+            <div class="circle-item" onclick="categoryClick('Women\'s Wear')">
                 <div class="circle-img"><i class="fas fa-female"></i></div>
                 <h4>Women's Wear</h4>
             </div>
-            <div class="circle-item">
+            <div class="circle-item" onclick="categoryClick('Kids Section')">
                 <div class="circle-img"><i class="fas fa-child"></i></div>
                 <h4>Kids Section</h4>
             </div>
-            <div class="circle-item">
+            <div class="circle-item" onclick="categoryClick('Accessories')">
                 <div class="circle-img"><i class="fas fa-glasses"></i></div>
                 <h4>Accessories</h4>
             </div>
-            <div class="circle-item">
+            <div class="circle-item" onclick="categoryClick('Sneakers')">
                 <div class="circle-img"><i class="fas fa-shoe-prints"></i></div>
                 <h4>Sneakers</h4>
             </div>
         </div>
     </section>
 
-    <div class="promo-banner">
+    <div id="promo" class="promo-banner">
         <div>
             <h2 style="color: var(--accent-gold); font-size: 2.5em;">Unlock VIP Perks</h2>
             <p style="font-size: 1.2em; margin-top: 10px;">Free Delivery + Birthday Vouchers + Early Access</p>
         </div>
-        <a href="#" class="hero-btn" style="background: white;">Join Elite Club</a>
+        <button class="hero-btn" style="background: white;" onclick="joinEliteClub()">Join Elite Club</button>
     </div>
 
-    <section class="shop-by-category" style="padding-top: 20px;">
+    <section id="trending" class="shop-by-category" style="padding-top: 20px;">
         <h2 class="section-title">Trending Now</h2>
         <div class="product-grid">
             <div class="product-card">
@@ -434,6 +464,7 @@
                     <div class="product-brand">Vyorate Originals</div>
                     <h3 class="product-title">Oversized Graphic Tee</h3>
                     <div class="product-price">₹ 799</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Oversized Graphic Tee', 799)">Add to Cart</button>
                 </div>
             </div>
             <div class="product-card">
@@ -442,6 +473,7 @@
                     <div class="product-brand">Vyorate Luxe</div>
                     <h3 class="product-title">Summer Floral Dress</h3>
                     <div class="product-price">₹ 1,299</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Summer Floral Dress', 1299)">Add to Cart</button>
                 </div>
             </div>
             <div class="product-card">
@@ -450,6 +482,7 @@
                     <div class="product-brand">Urban Fit</div>
                     <h3 class="product-title">Classic Blue Denim</h3>
                     <div class="product-price">₹ 1,499</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Classic Blue Denim', 1499)">Add to Cart</button>
                 </div>
             </div>
             <div class="product-card">
@@ -458,6 +491,7 @@
                     <div class="product-brand">Vyorate Active</div>
                     <h3 class="product-title">Pro-Run Sneakers</h3>
                     <div class="product-price">₹ 2,199</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('Pro-Run Sneakers', 2199)">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -467,28 +501,28 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h4>About Vyorate</h4>
-                <a href="#">Who We Are</a>
-                <a href="#">Store Locator</a>
-                <a href="#">Careers</a>
+                <a onclick="alert('Who We Are page is under construction.')">Who We Are</a>
+                <a onclick="alert('Store Locator feature coming soon!')">Store Locator</a>
+                <a onclick="alert('Careers page opening...')">Careers</a>
             </div>
             <div class="footer-col">
                 <h4>Help</h4>
-                <a href="#">Contact Us</a>
-                <a href="#">Shipping & Returns</a>
-                <a href="#">FAQs</a>
+                <a onclick="alert('Contact Us: support@vyorate.com')">Contact Us</a>
+                <a onclick="alert('Shipping & Returns policy...')">Shipping & Returns</a>
+                <a onclick="alert('Loading FAQs...')">FAQs</a>
             </div>
             <div class="footer-col">
                 <h4>Categories</h4>
-                <a href="#">Men's Fashion</a>
-                <a href="#">Women's Fashion</a>
-                <a href="#">Kids</a>
+                <a href="#categories">Men's Fashion</a>
+                <a href="#categories">Women's Fashion</a>
+                <a href="#categories">Kids</a>
             </div>
             <div class="footer-col">
                 <h4 style="color: var(--accent-gold);">Subscribe to Newsletter</h4>
                 <p style="margin-bottom: 15px;">Get the latest drops and offers straight to your inbox.</p>
                 <div class="search-box" style="background: rgba(255,255,255,0.2); width: 100%; max-width: 100%;">
-                    <input type="email" placeholder="Enter Email Address">
-                    <button style="background: var(--accent-gold); border: none; padding: 10px; border-radius: 20px; cursor: pointer;">Join</button>
+                    <input type="email" id="emailInput" placeholder="Enter Email Address">
+                    <button onclick="subscribeNewsletter()" style="background: var(--accent-gold); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; color: var(--primary-dark);">Join</button>
                 </div>
             </div>
         </div>
@@ -496,6 +530,55 @@
             <p>&copy; 2026 Vyorate Fashion. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        function performSearch() {
+            let query = document.getElementById("searchInput").value;
+            if (query.trim() !== "") {
+                alert("Searching Vyorate for: '" + query + "'...");
+            } else {
+                alert("Please type something to search.");
+            }
+        }
+
+        function openMenu() {
+            alert("Mobile Menu Opened!");
+        }
+
+        function openProfile() {
+            alert("Redirecting to User Login/Profile page...");
+        }
+
+        function openWishlist() {
+            alert("Opening your Wishlist. You have 0 saved items.");
+        }
+
+        function openCart() {
+            alert("Opening Shopping Bag. Proceed to checkout?");
+        }
+
+        function categoryClick(categoryName) {
+            alert("Loading all products in " + categoryName + "...");
+        }
+
+        function addToCart(productName, price) {
+            alert("Success! " + productName + " (₹" + price + ") has been added to your bag.");
+        }
+
+        function joinEliteClub() {
+            alert("Welcome! Redirecting you to the Vyorate Elite Club registration page.");
+        }
+
+        function subscribeNewsletter() {
+            let email = document.getElementById("emailInput").value;
+            if (email.includes("@")) {
+                alert("Thank you! " + email + " has been subscribed to our newsletter.");
+                document.getElementById("emailInput").value = "";
+            } else {
+                alert("Please enter a valid email address.");
+            }
+        }
+    </script>
 
 </body>
 </html>
