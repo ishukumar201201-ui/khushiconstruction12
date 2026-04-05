@@ -3,325 +3,499 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyorate | Premium Mobile Shop</title>
+    <title>Vyorate Fashion | Premium Clothing & Accessories</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* General Reset & Typography */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6; /* Light gray background */
-            color: #333;
-            line-height: 1.6;
+        :root {
+            --primary-dark: #0A3622; /* Emerald Green */
+            --accent-gold: #D4AF37; /* Premium Gold */
+            --light-bg: #F8F9FA;
+            --text-dark: #333333;
+            --text-light: #ffffff;
         }
 
-        /* Top Header */
-        .top-header {
-            background-color: #0b111e;
-            color: white;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* Top Notification Bar */
+        .top-bar {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
             text-align: center;
-            padding: 15px 0;
-            font-size: 1.5em;
+            padding: 8px;
+            font-size: 0.9em;
             font-weight: bold;
             letter-spacing: 1px;
         }
 
-        /* Hero Banner */
-        .hero {
-            background: linear-gradient(135deg, #10375c, #1f619e);
-            color: white;
-            text-align: center;
-            padding: 60px 20px 80px 20px;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .hero p {
-            font-size: 1.2em;
-            color: #d1e8ff;
-        }
-
-        /* Main 3 Cards Section */
-        .features-container {
+        /* Main Header */
+        header {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            padding: 15px 40px;
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: -40px auto 40px auto; /* Pulls cards slightly over the blue banner */
-            flex-wrap: wrap;
-        }
-        .feature-card {
-            background-color: white;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            padding: 30px 20px;
-            width: 320px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        .feature-card .icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        .feature-card h3 {
-            color: #111;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-        .feature-card p {
-            color: #555;
-            font-size: 0.95em;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* Forms Section (Sign In & Contact) */
-        .forms-section {
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 33%;
+        }
+
+        .header-right {
+            justify-content: flex-end;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            width: 33%;
+            text-align: center;
+            color: var(--accent-gold);
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: white;
+            outline: none;
+            padding-left: 10px;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: #ccc;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .icon-btn:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Category Navigation Menu */
+        .category-nav {
+            background: white;
+            padding: 15px 0;
             display: flex;
             justify-content: center;
             gap: 40px;
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            overflow-x: auto;
         }
 
-        /* Sign In Card */
-        .sign-in-card {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            width: 100%;
-            max-width: 350px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-        .sign-in-card h3 {
-            margin-bottom: 20px;
-            color: #111;
-            text-transform: uppercase;
-            font-size: 1.1em;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: inherit;
-        }
-        .btn-black {
-            background-color: #111;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .btn-black:hover {
-            background-color: #333;
-        }
-        .sign-in-links a {
-            display: block;
-            color: #0066cc;
+        .category-nav a {
             text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            text-transform: uppercase;
             font-size: 0.9em;
-            margin-bottom: 5px;
+            transition: color 0.3s;
         }
 
-        /* Contact Section */
-        .contact-area {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            border: 1px solid #e0e0e0;
+        .category-nav a:hover {
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
         }
-        .contact-form {
-            flex: 1;
-            min-width: 250px;
-        }
-        .contact-form h3 {
-            margin-bottom: 20px;
-            color: #111;
-        }
-        .contact-info-map {
-            flex: 1;
-            min-width: 200px;
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(10, 54, 34, 0.8), rgba(10, 54, 34, 0.8)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            height: 60vh;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-        .map-placeholder {
-            background-color: #e9ecef;
-            height: 120px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            color: #888;
-            border: 1px solid #ddd;
-        }
-        .contact-details p {
-            margin-bottom: 5px;
-            font-size: 0.9em;
-            color: #333;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
         }
 
-        /* Floating WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .whatsapp-float:hover {
-            background-color: #1ebe57;
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: var(--accent-gold);
+        }
+
+        .hero-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 30px;
+            transition: transform 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Circular Categories Section */
+        .shop-by-category {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--accent-gold);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .category-circles {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .circle-item {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .circle-img {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+            font-size: 3em;
+            color: var(--primary-dark);
+            transition: transform 0.3s;
+        }
+
+        .circle-item:hover .circle-img {
+            transform: translateY(-10px);
+            border: 3px solid var(--accent-gold);
+        }
+
+        /* Trending Products Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 40px 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 300px;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4em;
+            color: #ccc;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-brand {
+            color: #888;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: var(--text-dark);
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary-dark);
+            font-size: 1.2em;
+        }
+
+        /* Promo Banner Middle */
+        .promo-banner {
+            background-color: var(--primary-dark);
+            color: white;
+            margin: 40px;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         /* Footer */
         footer {
-            background-color: #0b111e;
-            color: #aaa;
-            text-align: center;
-            padding: 20px 0;
-            font-size: 0.9em;
-            margin-top: 40px;
-        }
-        footer a {
-            color: #aaa;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        footer a:hover {
-            color: white;
+            background-color: #111;
+            color: #ccc;
+            padding: 60px 40px 20px 40px;
         }
 
-        /* Responsive Design */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .forms-section {
+            header {
                 flex-direction: column;
-                align-items: center;
+                gap: 15px;
+                padding: 15px;
             }
-            .contact-area {
-                flex-direction: column;
+            .header-left, .header-right, .logo {
+                width: 100%;
+                justify-content: center;
+            }
+            .hero h1 {
+                font-size: 2.5em;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-header">
-        Vyorate
+    <div class="top-bar">
+        PREMIUM MEMBERS: FREE SHIPPING ON ALL ORDERS | USE CODE: VYORATEGOLD
+    </div>
+
+    <header>
+        <div class="header-left">
+            <button class="icon-btn"><i class="fas fa-bars"></i></button>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for luxury...">
+            </div>
+        </div>
+        
+        <div class="logo">
+            VYORATE
+        </div>
+
+        <div class="header-right">
+            <button class="icon-btn"><i class="far fa-user"></i></button>
+            <button class="icon-btn"><i class="far fa-heart"></i></button>
+            <button class="icon-btn"><i class="fas fa-shopping-bag"></i></button>
+        </div>
+    </header>
+
+    <div class="category-nav">
+        <a href="#">New Arrivals</a>
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#">Kids</a>
+        <a href="#">Footwear</a>
+        <a href="#">Accessories</a>
+        <a href="#">Sale</a>
     </div>
 
     <section class="hero">
-        <h1>WELCOME TO VYORATE</h1>
-        <p>Premium Mobile & Accessories Solutions</p>
+        <h1>The Summer Elite Collection</h1>
+        <p>Buy 1 Get 1 Free on Exclusive Merch</p>
+        <a href="#" class="hero-btn">Explore Now</a>
     </section>
 
-    <section class="features-container">
-        <div class="feature-card">
-            <div class="icon">📱</div>
-            <h3>Latest Smartphones</h3>
-            <p>Explore the newest models from top global brands (Apple, Samsung, OnePlus) at unbeatable prices with flexible financing.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🎧</div>
-            <h3>Premium Accessories</h3>
-            <p>Wide range of high-quality accessories. From fast-chargers & premium cases to professional camera lenses & smart home devices.</p>
-        </div>
-        <div class="feature-card">
-            <div class="icon">🧰</div>
-            <h3>Certified Repairs</h3>
-            <p>Fast, reliable, and guaranteed repairs by expert technicians. Screen replacements, battery checks, and software issues.</p>
+    <section class="shop-by-category">
+        <h2 class="section-title">Explore Categories</h2>
+        <div class="category-circles">
+            <div class="circle-item">
+                <div class="circle-img"><i class="fas fa-tshirt"></i></div>
+                <h4>Men's Wear</h4>
+            </div>
+            <div class="circle-item">
+                <div class="circle-img"><i class="fas fa-female"></i></div>
+                <h4>Women's Wear</h4>
+            </div>
+            <div class="circle-item">
+                <div class="circle-img"><i class="fas fa-child"></i></div>
+                <h4>Kids Section</h4>
+            </div>
+            <div class="circle-item">
+                <div class="circle-img"><i class="fas fa-glasses"></i></div>
+                <h4>Accessories</h4>
+            </div>
+            <div class="circle-item">
+                <div class="circle-img"><i class="fas fa-shoe-prints"></i></div>
+                <h4>Sneakers</h4>
+            </div>
         </div>
     </section>
 
-    <section class="forms-section">
-        
-        <div class="sign-in-card">
-            <h3>Sign In To Your Vyorate Account</h3>
-            <div class="form-group">
-                <input type="text" placeholder="Email or Username">
+    <div class="promo-banner">
+        <div>
+            <h2 style="color: var(--accent-gold); font-size: 2.5em;">Unlock VIP Perks</h2>
+            <p style="font-size: 1.2em; margin-top: 10px;">Free Delivery + Birthday Vouchers + Early Access</p>
+        </div>
+        <a href="#" class="hero-btn" style="background: white;">Join Elite Club</a>
+    </div>
+
+    <section class="shop-by-category" style="padding-top: 20px;">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">👕</div>
+                <div class="product-info">
+                    <div class="product-brand">Vyorate Originals</div>
+                    <h3 class="product-title">Oversized Graphic Tee</h3>
+                    <div class="product-price">₹ 799</div>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="password" placeholder="Password">
+            <div class="product-card">
+                <div class="product-image">👗</div>
+                <div class="product-info">
+                    <div class="product-brand">Vyorate Luxe</div>
+                    <h3 class="product-title">Summer Floral Dress</h3>
+                    <div class="product-price">₹ 1,299</div>
+                </div>
             </div>
-            <button class="btn-black">Log In</button>
-            <div class="sign-in-links">
-                <a href="#">Forgot Password?</a>
-                <a href="#">Create an Account</a>
+            <div class="product-card">
+                <div class="product-image">👖</div>
+                <div class="product-info">
+                    <div class="product-brand">Urban Fit</div>
+                    <h3 class="product-title">Classic Blue Denim</h3>
+                    <div class="product-price">₹ 1,499</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">👟</div>
+                <div class="product-info">
+                    <div class="product-brand">Vyorate Active</div>
+                    <h3 class="product-title">Pro-Run Sneakers</h3>
+                    <div class="product-price">₹ 2,199</div>
+                </div>
             </div>
         </div>
-
-        <div class="contact-area">
-            <div class="contact-form">
-                <h3>Contact</h3>
-                <div class="form-group">
-                    <input type="text" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <textarea rows="3" placeholder="Problem/Inquiry"></textarea>
-                </div>
-                <button class="btn-black" style="width: auto; padding: 10px 20px;">Send Message</button>
-            </div>
-            
-            <div class="contact-info-map">
-                <div class="map-placeholder">
-                    🗺️ Map View Here
-                </div>
-                <div class="contact-details">
-                    <p>📞 +91 335658830</p>
-                    <p>📞 +91-8572-7700</p>
-                    <p>📍 Shop 12, Main Market</p>
-                </div>
-            </div>
-        </div>
-
     </section>
-
-    <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp-float" target="_blank">
-        💬 WhatsApp
-    </a>
 
     <footer>
-        <p>&copy; 2026 Vyorate. All rights reserved. 
-            <a href="#">Terms & Conditions</a> | 
-            <a href="#">Privacy Policy</a>
-        </p>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>About Vyorate</h4>
+                <a href="#">Who We Are</a>
+                <a href="#">Store Locator</a>
+                <a href="#">Careers</a>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <a href="#">Contact Us</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">FAQs</a>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <a href="#">Men's Fashion</a>
+                <a href="#">Women's Fashion</a>
+                <a href="#">Kids</a>
+            </div>
+            <div class="footer-col">
+                <h4 style="color: var(--accent-gold);">Subscribe to Newsletter</h4>
+                <p style="margin-bottom: 15px;">Get the latest drops and offers straight to your inbox.</p>
+                <div class="search-box" style="background: rgba(255,255,255,0.2); width: 100%; max-width: 100%;">
+                    <input type="email" placeholder="Enter Email Address">
+                    <button style="background: var(--accent-gold); border: none; padding: 10px; border-radius: 20px; cursor: pointer;">Join</button>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">
+            <p>&copy; 2026 Vyorate Fashion. All rights reserved.</p>
+        </div>
     </footer>
 
 </body>
+</html>
