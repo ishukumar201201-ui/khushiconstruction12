@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VYORATE STORE | Search Anything</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .search-section { background: linear-gradient(to bottom, #0a0a0a, #050505); padding: 150px 50px 50px; text-align: center; }
+        .big-search-bar { max-width: 800px; margin: 0 auto; position: relative; }
+        .big-search-bar input { width: 100%; padding: 20px 30px; border-radius: 40px; border: 2px solid var(--accent-color); background: rgba(255,255,255,0.05); color: white; font-size: 1.2rem; outline: none; box-shadow: 0 0 20px rgba(0, 240, 255, 0.2); }
+        .big-search-bar i { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); color: var(--accent-color); font-size: 1.5rem; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; padding: 50px; }
+        .p-card { background: var(--card-bg); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; text-align: center; }
+        .p-card:hover { transform: translateY(-10px); border-color: var(--accent-color); box-shadow: 0 10px 30px rgba(0,240,255,0.2); }
+        .p-img { width: 100%; height: 200px; background: #111; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #333; }
+        .p-card h3 { margin: 10px 0; font-size: 1.2rem; }
+        .p-card .price { color: var(--accent-color); font-weight: bold; font-size: 1.3rem; }
+        .buy-btn { width: 100%; padding: 12px; margin-top: 15px; border: none; border-radius: 8px; background: white; color: black; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .buy-btn:hover { background: var(--accent-color); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VYORATE</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="store.html" style="color: var(--accent-color);">Store</a>
+            <a href="index.html#about">About Us</a>
+        </div>
+        <div class="nav-actions"><button class="login-btn">Login</button></div>
+    </nav>
+
+    <div class="search-section">
+        <h2 style="margin-bottom: 20px;">Search <span style="color:var(--accent-color)">Global Mobile Store</span></h2>
+        <div class="big-search-bar">
+            <input type="text" id="mainSearch" placeholder="Search iPhone, Samsung, Display, Covers..." onkeyup="searchProducts()">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <div class="product-grid" id="store-grid">
+        <!-- Products will appear here via JavaScript -->
+    </div>
+
+    <script>
+        // SMART DATASET (Puri Duniya Ke Popular Products)
+        const products = [
+            { name: "iPhone 15 Pro Max", price: "₹1,59,900", cat: "mobile", brand: "apple" },
+            { name: "iPhone 14", price: "₹69,900", cat: "mobile", brand: "apple" },
+            { name: "iPhone 13 Display (Original)", price: "₹12,500", cat: "part", brand: "apple" },
+            { name: "Samsung S24 Ultra", price: "₹1,29,999", cat: "mobile", brand: "samsung" },
+            { name: "Samsung Fold 5", price: "₹1,49,999", cat: "mobile", brand: "samsung" },
+            { name: "iPhone MagSafe Cover", price: "₹2,500", cat: "cover", brand: "apple" },
+            { name: "Google Pixel 8 Pro", price: "₹93,999", cat: "mobile", brand: "google" },
+            { name: "OnePlus 12", price: "₹64,999", cat: "mobile", brand: "oneplus" },
+            { name: "Vivo X100 Pro", price: "₹89,999", cat: "mobile", brand: "vivo" },
+            { name: "Xiaomi 14 Ultra", price: "₹99,999", cat: "mobile", brand: "xiaomi" }
+        ];
+
+        // Automatic 100+ Dummy Data Generator for "Everything" look
+        for(let i=1; i<=50; i++) {
+            products.push({ name: "Premium Case v" + i, price: "₹999", cat: "cover", brand: "generic" });
+            products.push({ name: "Replacement Battery " + i, price: "₹1,500", cat: "part", brand: "generic" });
+        }
+
+        function displayProducts(data) {
+            const grid = document.getElementById('store-grid');
+            grid.innerHTML = data.map(p => `
+                <div class="p-card">
+                    <div class="p-img"><i class="fas ${p.cat === 'mobile' ? 'fa-mobile-alt' : (p.cat === 'part' ? 'fa-microchip' : 'fa-shield-alt')}"></i></div>
+                    <h3>${p.name}</h3>
+                    <p style="color: #888; font-size: 0.9rem;">${p.brand.toUpperCase()}</p>
+                    <div class="price">${p.price}</div>
+                    <button class="buy-btn">Add to Cart</button>
+                </div>
+            `).join('');
+        }
+
+        function searchProducts() {
+            const term = document.getElementById('mainSearch').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term) || p.brand.toLowerCase().includes(term));
+            displayProducts(filtered);
+        }
+
+        // Initial Load
+        displayProducts(products);
+    </script>
+</body>
+</html>
