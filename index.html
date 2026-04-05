@@ -3,582 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyorate Fashion | Premium Clothing & Accessories</title>
+    <title>Vyorate | Premium Shopping Experience</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-dark: #0A3622; /* Emerald Green */
-            --accent-gold: #D4AF37; /* Premium Gold */
-            --light-bg: #F8F9FA;
-            --text-dark: #333333;
-            --text-light: #ffffff;
+            --primary: #0A3622;
+            --accent: #D4AF37;
+            --bg: #F4F7F6;
+            --white: #ffffff;
+            --text: #333;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* Smooth Scrolling add kiya hai */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-        }
-
-        /* Top Notification Bar */
-        .top-bar {
-            background-color: var(--accent-gold);
-            color: var(--primary-dark);
-            text-align: center;
-            padding: 8px;
-            font-size: 0.9em;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        /* Main Header */
-        header {
-            background-color: var(--primary-dark);
-            color: var(--text-light);
-            padding: 15px 40px;
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .header-left, .header-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            width: 33%;
-        }
+        .logo { color: var(--accent); font-size: 24px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+        
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; cursor: pointer; }
+        .nav-links a:hover { color: var(--accent); }
 
-        .header-right {
-            justify-content: flex-end;
-        }
+        .nav-icons { display: flex; gap: 20px; color: white; align-items: center; }
+        .nav-icons i { cursor: pointer; font-size: 18px; transition: 0.3s; }
+        .nav-icons i:hover { color: var(--accent); }
 
-        .logo {
-            font-size: 2em;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            width: 33%;
+        /* Page Sections (Hidden by default except home) */
+        .page { display: none; padding: 40px 5%; min-height: 80vh; }
+        .active-page { display: block; }
+
+        /* Login Page Styling */
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            color: var(--accent-gold);
-            cursor: pointer;
         }
 
-        .search-box {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 8px 15px;
-            display: flex;
-            align-items: center;
+        .auth-container h2 { margin-bottom: 20px; color: var(--primary); }
+        .auth-input {
             width: 100%;
-            max-width: 250px;
-        }
-
-        .search-box input {
-            background: transparent;
-            border: none;
-            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
             outline: none;
-            padding-left: 10px;
-            width: 100%;
         }
 
-        .search-box input::placeholder {
-            color: #ccc;
-        }
-
-        .icon-btn {
-            background: none;
-            border: none;
+        .btn-prime {
+            background: var(--primary);
             color: white;
-            font-size: 1.2em;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .icon-btn:hover {
-            color: var(--accent-gold);
-        }
-
-        /* Category Navigation Menu */
-        .category-nav {
-            background: white;
-            padding: 15px 0;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            overflow-x: auto;
-        }
-
-        .category-nav a {
-            text-decoration: none;
-            color: var(--text-dark);
             font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .category-nav a:hover {
-            color: var(--primary-dark);
-            border-bottom: 2px solid var(--accent-gold);
+            margin-top: 15px;
         }
 
         /* Hero Banner */
         .hero {
-            background: linear-gradient(rgba(10, 54, 34, 0.8), rgba(10, 54, 34, 0.8)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1350&q=80');
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             color: white;
-            padding: 20px;
-        }
-
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .hero p {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            color: var(--accent-gold);
-        }
-
-        .hero-btn {
-            background-color: var(--accent-gold);
-            color: var(--primary-dark);
-            padding: 15px 40px;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: bold;
-            border-radius: 30px;
-            transition: transform 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-
-        .hero-btn:hover {
-            transform: scale(1.05);
-        }
-
-        /* Circular Categories Section */
-        .shop-by-category {
-            padding: 60px 20px;
             text-align: center;
         }
 
-        .section-title {
-            font-size: 2em;
-            color: var(--primary-dark);
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-        }
+        .hero h1 { font-size: 48px; margin-bottom: 10px; }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 3px;
-            background: var(--accent-gold);
-            bottom: -10px;
-            left: 25%;
-        }
-
-        .category-circles {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .circle-item {
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .circle-img {
-            width: 120px;
-            height: 120px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-            font-size: 3em;
-            color: var(--primary-dark);
-            transition: transform 0.3s;
-        }
-
-        .circle-item:hover .circle-img {
-            transform: translateY(-10px);
-            border: 3px solid var(--accent-gold);
-        }
-
-        /* Trending Products Grid */
-        .product-grid {
+        /* Product Grid */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            padding: 0 40px 60px 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+            gap: 25px;
+            margin-top: 30px;
         }
 
-        .product-card {
+        .card {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        .product-image {
-            height: 250px;
-            background-color: #eee;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 4em;
-            color: #ccc;
-        }
-
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .product-brand {
-            color: #888;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .product-title {
-            font-size: 1.1em;
-            margin: 10px 0;
-            color: var(--text-dark);
-        }
-
-        .product-price {
-            font-weight: bold;
-            color: var(--primary-dark);
-            font-size: 1.2em;
-            margin-bottom: 15px;
-        }
-
-        /* Add to Cart Button on Products */
-        .add-to-cart-btn {
-            background-color: var(--primary-dark);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            transition: 0.3s;
             cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            transition: background 0.3s;
+            border: 1px solid #eee;
         }
 
-        .add-to-cart-btn:hover {
-            background-color: var(--accent-gold);
-            color: var(--primary-dark);
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .card-img { height: 250px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; font-size: 50px; }
+        .card-body { padding: 15px; text-align: center; }
+        .price { font-weight: 700; color: var(--primary); font-size: 18px; margin: 10px 0; }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: 0.4s;
+            padding: 30px;
         }
 
-        /* Promo Banner Middle */
-        .promo-banner {
-            background-color: var(--primary-dark);
-            color: white;
-            margin: 40px;
-            padding: 40px;
-            text-align: center;
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+        .cart-active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; }
 
         /* Footer */
-        footer {
-            background-color: #111;
-            color: #ccc;
-            padding: 60px 40px 20px 40px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h4 {
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .footer-col a {
-            display: block;
-            color: #aaa;
-            text-decoration: none;
-            margin-bottom: 10px;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
-
-        .footer-col a:hover {
-            color: var(--accent-gold);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-                padding: 15px;
-            }
-            .header-left, .header-right, .logo {
-                width: 100%;
-                justify-content: center;
-            }
-            .hero h1 {
-                font-size: 2.5em;
-            }
-        }
+        footer { background: #111; color: #888; padding: 50px 5% 20px; margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-grid h4 { color: white; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="top-bar">
-        PREMIUM MEMBERS: FREE SHIPPING ON ALL ORDERS | USE CODE: VYORATEGOLD
+    <nav>
+        <div class="logo" onclick="showPage('home')">Vyorate</div>
+        <div class="nav-links">
+            <a onclick="showPage('home')">Home</a>
+            <a onclick="showPage('shop')">Shop</a>
+            <a onclick="showPage('home')">Collections</a>
+            <a onclick="showPage('home')">Sale</a>
+        </div>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-user" onclick="showPage('login')"></i>
+            <i class="fas fa-shopping-bag" onclick="toggleCart()"></i>
+        </div>
+    </nav>
+
+    <div id="home" class="page active-page">
+        <div class="hero">
+            <h1>Premium Elite Style</h1>
+            <p>Flat 50% Off on New Arrivals</p>
+            <button class="btn-prime" style="width: 200px;" onclick="showPage('shop')">Shop Now</button>
+        </div>
+
+        <h2 style="margin-top: 50px; text-align: center;">Featured Products</h2>
+        <div class="grid" id="featured-grid">
+            </div>
     </div>
 
-    <header>
-        <div class="header-left">
-            <button class="icon-btn" onclick="openMenu()"><i class="fas fa-bars"></i></button>
-            <div class="search-box">
-                <i class="fas fa-search" onclick="performSearch()" style="cursor: pointer;"></i>
-                <input type="text" id="searchInput" placeholder="Search for luxury...">
-            </div>
-        </div>
-        
-        <div class="logo" onclick="window.scrollTo(0,0)">
-            VYORATE
-        </div>
-
-        <div class="header-right">
-            <button class="icon-btn" onclick="openProfile()"><i class="far fa-user"></i></button>
-            <button class="icon-btn" onclick="openWishlist()"><i class="far fa-heart"></i></button>
-            <button class="icon-btn" onclick="openCart()"><i class="fas fa-shopping-bag"></i></button>
-        </div>
-    </header>
-
-    <div class="category-nav">
-        <a href="#trending">New Arrivals</a>
-        <a href="#categories">Men</a>
-        <a href="#categories">Women</a>
-        <a href="#categories">Kids</a>
-        <a href="#trending">Footwear</a>
-        <a href="#categories">Accessories</a>
-        <a href="#promo">Sale</a>
+    <div id="shop" class="page">
+        <h2 style="text-align: center;">All Luxury Collections</h2>
+        <div class="grid" id="full-grid"></div>
     </div>
 
-    <section class="hero">
-        <h1>The Summer Elite Collection</h1>
-        <p>Buy 1 Get 1 Free on Exclusive Merch</p>
-        <button class="hero-btn" onclick="document.getElementById('categories').scrollIntoView();">Explore Now</button>
-    </section>
-
-    <section id="categories" class="shop-by-category">
-        <h2 class="section-title">Explore Categories</h2>
-        <div class="category-circles">
-            <div class="circle-item" onclick="categoryClick('Men\'s Wear')">
-                <div class="circle-img"><i class="fas fa-tshirt"></i></div>
-                <h4>Men's Wear</h4>
-            </div>
-            <div class="circle-item" onclick="categoryClick('Women\'s Wear')">
-                <div class="circle-img"><i class="fas fa-female"></i></div>
-                <h4>Women's Wear</h4>
-            </div>
-            <div class="circle-item" onclick="categoryClick('Kids Section')">
-                <div class="circle-img"><i class="fas fa-child"></i></div>
-                <h4>Kids Section</h4>
-            </div>
-            <div class="circle-item" onclick="categoryClick('Accessories')">
-                <div class="circle-img"><i class="fas fa-glasses"></i></div>
-                <h4>Accessories</h4>
-            </div>
-            <div class="circle-item" onclick="categoryClick('Sneakers')">
-                <div class="circle-img"><i class="fas fa-shoe-prints"></i></div>
-                <h4>Sneakers</h4>
-            </div>
+    <div id="login" class="page">
+        <div class="auth-container">
+            <i class="fas fa-user-circle" style="font-size: 50px; color: var(--primary); margin-bottom: 15px;"></i>
+            <h2>Welcome Back</h2>
+            <p>Login to your Vyorate account</p>
+            <input type="text" class="auth-input" placeholder="Email or Mobile Number">
+            <input type="password" class="auth-input" placeholder="Password">
+            <button class="btn-prime" onclick="handleLogin()">Login</button>
+            <p style="margin-top: 15px; font-size: 13px;">Don't have an account? <span style="color: var(--accent); cursor: pointer;">Sign Up</span></p>
         </div>
-    </section>
-
-    <div id="promo" class="promo-banner">
-        <div>
-            <h2 style="color: var(--accent-gold); font-size: 2.5em;">Unlock VIP Perks</h2>
-            <p style="font-size: 1.2em; margin-top: 10px;">Free Delivery + Birthday Vouchers + Early Access</p>
-        </div>
-        <button class="hero-btn" style="background: white;" onclick="joinEliteClub()">Join Elite Club</button>
     </div>
 
-    <section id="trending" class="shop-by-category" style="padding-top: 20px;">
-        <h2 class="section-title">Trending Now</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">👕</div>
-                <div class="product-info">
-                    <div class="product-brand">Vyorate Originals</div>
-                    <h3 class="product-title">Oversized Graphic Tee</h3>
-                    <div class="product-price">₹ 799</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Oversized Graphic Tee', 799)">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">👗</div>
-                <div class="product-info">
-                    <div class="product-brand">Vyorate Luxe</div>
-                    <h3 class="product-title">Summer Floral Dress</h3>
-                    <div class="product-price">₹ 1,299</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Summer Floral Dress', 1299)">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">👖</div>
-                <div class="product-info">
-                    <div class="product-brand">Urban Fit</div>
-                    <h3 class="product-title">Classic Blue Denim</h3>
-                    <div class="product-price">₹ 1,499</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Classic Blue Denim', 1499)">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">👟</div>
-                <div class="product-info">
-                    <div class="product-brand">Vyorate Active</div>
-                    <h3 class="product-title">Pro-Run Sneakers</h3>
-                    <div class="product-price">₹ 2,199</div>
-                    <button class="add-to-cart-btn" onclick="addToCart('Pro-Run Sneakers', 2199)">Add to Cart</button>
-                </div>
-            </div>
+    <div id="cart" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Shopping Bag</h3>
+            <i class="fas fa-times" style="cursor: pointer;" onclick="toggleCart()"></i>
         </div>
-    </section>
+        <div id="cart-items" style="margin-top: 20px;">
+            <p style="text-align: center; color: #999;">Your bag is empty.</p>
+        </div>
+        <div style="position: absolute; bottom: 30px; width: 83%;">
+            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px;">
+                <span>Total:</span>
+                <span id="cart-total">₹ 0</span>
+            </div>
+            <button class="btn-prime" onclick="alert('Proceeding to Secure Checkout...')">Checkout Now</button>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
+            <div>
                 <h4>About Vyorate</h4>
-                <a onclick="alert('Who We Are page is under construction.')">Who We Are</a>
-                <a onclick="alert('Store Locator feature coming soon!')">Store Locator</a>
-                <a onclick="alert('Careers page opening...')">Careers</a>
+                <p>We provide the most premium and exclusive fashion trends across the globe.</p>
             </div>
-            <div class="footer-col">
-                <h4>Help</h4>
-                <a onclick="alert('Contact Us: support@vyorate.com')">Contact Us</a>
-                <a onclick="alert('Shipping & Returns policy...')">Shipping & Returns</a>
-                <a onclick="alert('Loading FAQs...')">FAQs</a>
+            <div>
+                <h4>Customer Care</h4>
+                <p>Shipping Policy</p>
+                <p>Returns & Refunds</p>
+                <p>Track Order</p>
             </div>
-            <div class="footer-col">
-                <h4>Categories</h4>
-                <a href="#categories">Men's Fashion</a>
-                <a href="#categories">Women's Fashion</a>
-                <a href="#categories">Kids</a>
-            </div>
-            <div class="footer-col">
-                <h4 style="color: var(--accent-gold);">Subscribe to Newsletter</h4>
-                <p style="margin-bottom: 15px;">Get the latest drops and offers straight to your inbox.</p>
-                <div class="search-box" style="background: rgba(255,255,255,0.2); width: 100%; max-width: 100%;">
-                    <input type="email" id="emailInput" placeholder="Enter Email Address">
-                    <button onclick="subscribeNewsletter()" style="background: var(--accent-gold); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; color: var(--primary-dark);">Join</button>
-                </div>
+            <div>
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> +91 99999-XXXXX</p>
+                <p><i class="fas fa-envelope"></i> support@vyorate.com</p>
             </div>
         </div>
-        <div style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">
-            <p>&copy; 2026 Vyorate Fashion. All rights reserved.</p>
-        </div>
+        <p style="text-align: center; margin-top: 40px; border-top: 1px solid #222; padding-top: 20px;">
+            &copy; 2026 Vyorate Fashion. Crafted for Excellence.
+        </p>
     </footer>
 
     <script>
-        function performSearch() {
-            let query = document.getElementById("searchInput").value;
-            if (query.trim() !== "") {
-                alert("Searching Vyorate for: '" + query + "'...");
-            } else {
-                alert("Please type something to search.");
-            }
+        // Product Database
+        const products = [
+            { id: 1, name: "Luxury Emerald Suit", price: 12999, icon: "👔" },
+            { id: 2, name: "Gold Edition Watch", price: 8500, icon: "⌚" },
+            { id: 3, name: "Premium Leather Shoes", price: 4200, icon: "👞" },
+            { id: 4, name: "Satin Evening Gown", price: 15000, icon: "👗" },
+            { id: 5, name: "Designer Sunglasses", price: 2500, icon: "🕶️" },
+            { id: 6, name: "Signature Perfume", price: 3800, icon: "🧪" }
+        ];
+
+        // Page Navigation Logic
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+            window.scrollTo(0,0);
         }
 
-        function openMenu() {
-            alert("Mobile Menu Opened!");
+        // Load Products
+        function loadProducts() {
+            const featured = document.getElementById('featured-grid');
+            const shop = document.getElementById('full-grid');
+            
+            products.forEach(p => {
+                const html = `
+                    <div class="card">
+                        <div class="card-img">${p.icon}</div>
+                        <div class="card-body">
+                            <h4>${p.name}</h4>
+                            <p class="price">₹ ${p.price.toLocaleString()}</p>
+                            <button class="btn-prime" onclick="addToCart('${p.name}', ${p.price})">Add to Bag</button>
+                        </div>
+                    </div>
+                `;
+                if(p.id <= 3) featured.innerHTML += html;
+                shop.innerHTML += html;
+            });
         }
 
-        function openProfile() {
-            alert("Redirecting to User Login/Profile page...");
+        // Cart Logic
+        let cart = [];
+        function toggleCart() {
+            document.getElementById('cart').classList.toggle('cart-active');
         }
 
-        function openWishlist() {
-            alert("Opening your Wishlist. You have 0 saved items.");
+        function addToCart(name, price) {
+            cart.push({name, price});
+            updateCart();
+            toggleCart();
         }
 
-        function openCart() {
-            alert("Opening Shopping Bag. Proceed to checkout?");
+        function updateCart() {
+            const container = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+            container.innerHTML = "";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                container.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #f0f0f0; padding-bottom:5px;">
+                        <div>
+                            <p style="font-size:14px; font-weight:600;">${item.name}</p>
+                            <p style="font-size:12px; color:#666;">₹ ${item.price}</p>
+                        </div>
+                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+                    </div>
+                `;
+            });
+            totalEl.innerText = "₹ " + total.toLocaleString();
         }
 
-        function categoryClick(categoryName) {
-            alert("Loading all products in " + categoryName + "...");
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
         }
 
-        function addToCart(productName, price) {
-            alert("Success! " + productName + " (₹" + price + ") has been added to your bag.");
+        function handleLogin() {
+            alert("Login Successful! Redirecting to Dashboard...");
+            showPage('home');
         }
 
-        function joinEliteClub() {
-            alert("Welcome! Redirecting you to the Vyorate Elite Club registration page.");
-        }
-
-        function subscribeNewsletter() {
-            let email = document.getElementById("emailInput").value;
-            if (email.includes("@")) {
-                alert("Thank you! " + email + " has been subscribed to our newsletter.");
-                document.getElementById("emailInput").value = "";
-            } else {
-                alert("Please enter a valid email address.");
-            }
-        }
+        window.onload = loadProducts;
     </script>
-
 </body>
 </html>
