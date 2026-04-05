@@ -3,308 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyorate | Premium Shopping Experience</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Vyorate | Exclusive Mobile & Fashion Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #0A3622;
-            --accent: #D4AF37;
-            --bg: #F4F7F6;
-            --white: #ffffff;
-            --text: #333;
+            --primary: #0071e3; /* Apple style blue */
+            --dark: #121212;
+            --light: #f5f5f7;
+            --accent: #ff9f0a;
+            --glass: rgba(255, 255, 255, 0.8);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: all 0.3s ease; }
+        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; }
 
-        /* Navigation */
+        /* --- Header & Nav --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--glass); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
         nav {
-            background: var(--primary);
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
         }
+        .logo { font-size: 28px; font-weight: 800; color: var(--primary); letter-spacing: -1px; cursor: pointer; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; font-size: 15px; cursor: pointer; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-icons { display: flex; gap: 20px; font-size: 20px; cursor: pointer; }
+        .cart-count { background: var(--primary); color: white; font-size: 10px; padding: 2px 6px; border-radius: 50%; position: absolute; top: 10px; }
 
-        .logo { color: var(--accent); font-size: 24px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
-        
-        .nav-links { display: flex; gap: 25px; }
-        .nav-links a { color: white; text-decoration: none; font-size: 14px; font-weight: 500; transition: 0.3s; cursor: pointer; }
-        .nav-links a:hover { color: var(--accent); }
+        /* --- Page Layout --- */
+        .page { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.5s ease-in-out; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .nav-icons { display: flex; gap: 20px; color: white; align-items: center; }
-        .nav-icons i { cursor: pointer; font-size: 18px; transition: 0.3s; }
-        .nav-icons i:hover { color: var(--accent); }
-
-        /* Page Sections (Hidden by default except home) */
-        .page { display: none; padding: 40px 5%; min-height: 80vh; }
-        .active-page { display: block; }
-
-        /* Login Page Styling */
-        .auth-container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .auth-container h2 { margin-bottom: 20px; color: var(--primary); }
-        .auth-input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            outline: none;
-        }
-
-        .btn-prime {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-top: 15px;
-        }
-
-        /* Hero Banner */
+        /* --- Hero Section --- */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1350&q=80');
-            height: 450px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
+            height: 500px; border-radius: 30px; margin: 20px;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            display: flex; align-items: center; justify-content: center;
+            color: white; text-align: center; position: relative; overflow: hidden;
         }
-
-        .hero h1 { font-size: 48px; margin-bottom: 10px; }
-
-        /* Product Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+        .hero-content h1 { font-size: 60px; font-weight: 800; margin-bottom: 15px; }
+        .hero-content p { font-size: 20px; opacity: 0.8; margin-bottom: 25px; }
+        .btn-main {
+            background: var(--primary); color: white; padding: 15px 40px;
+            border-radius: 30px; text-decoration: none; font-weight: 600; border: none; cursor: pointer;
         }
+        .btn-main:hover { background: #0056b3; transform: scale(1.05); }
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: 0.3s;
-            cursor: pointer;
-            border: 1px solid #eee;
+        /* --- Product Grid --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-card {
+            background: white; border-radius: 20px; padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;
         }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .product-img { width: 100%; height: 200px; border-radius: 15px; background: #eee; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+        .product-name { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .product-price { color: var(--primary); font-weight: 700; font-size: 20px; margin-bottom: 15px; }
 
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .card-img { height: 250px; background: #f9f9f9; display: flex; align-items: center; justify-content: center; font-size: 50px; }
-        .card-body { padding: 15px; text-align: center; }
-        .price { font-weight: 700; color: var(--primary); font-size: 18px; margin: 10px 0; }
-
-        /* Cart Sidebar */
-        .cart-sidebar {
-            position: fixed;
-            right: -100%;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            z-index: 2000;
-            transition: 0.4s;
-            padding: 30px;
+        /* --- Cart Panel --- */
+        .cart-panel {
+            position: fixed; right: -400px; top: 0; width: 400px; height: 100%;
+            background: white; z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            padding: 30px; display: flex; flex-direction: column;
         }
+        .cart-panel.open { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
-        .cart-active { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        /* --- Footer --- */
+        footer { background: white; padding: 60px 20px; border-top: 1px solid #eee; margin-top: 50px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h4 { margin-bottom: 20px; font-weight: 700; }
+        .footer-col p { color: #666; line-height: 1.8; font-size: 14px; }
 
-        /* Footer */
-        footer { background: #111; color: #888; padding: 50px 5% 20px; margin-top: 50px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
-        .footer-grid h4 { color: white; margin-bottom: 20px; }
+        /* --- WhatsApp Floating Button --- */
+        .whatsapp-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #25d366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000;
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo" onclick="showPage('home')">Vyorate</div>
-        <div class="nav-links">
-            <a onclick="showPage('home')">Home</a>
-            <a onclick="showPage('shop')">Shop</a>
-            <a onclick="showPage('home')">Collections</a>
-            <a onclick="showPage('home')">Sale</a>
-        </div>
-        <div class="nav-icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-user" onclick="showPage('login')"></i>
-            <i class="fas fa-shopping-bag" onclick="toggleCart()"></i>
-        </div>
-    </nav>
+    <div class="whatsapp-btn" onclick="window.open('https://wa.me/91XXXXXXXXXX')">
+        <i class="fab fa-whatsapp"></i>
+    </div>
 
-    <div id="home" class="page active-page">
-        <div class="hero">
-            <h1>Premium Elite Style</h1>
-            <p>Flat 50% Off on New Arrivals</p>
-            <button class="btn-prime" style="width: 200px;" onclick="showPage('shop')">Shop Now</button>
-        </div>
-
-        <h2 style="margin-top: 50px; text-align: center;">Featured Products</h2>
-        <div class="grid" id="featured-grid">
+    <header>
+        <nav>
+            <div class="logo" onclick="navigateTo('home-page')">VYORATE</div>
+            <div class="nav-links">
+                <a onclick="navigateTo('home-page')">Home</a>
+                <a onclick="navigateTo('shop-page')">Store</a>
+                <a onclick="navigateTo('repair-page')">Repairs</a>
+                <a onclick="navigateTo('login-page')">Account</a>
             </div>
-    </div>
+            <div class="nav-icons">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-shopping-bag" onclick="toggleCart()" style="position: relative;">
+                    <span class="cart-count" id="cart-count">0</span>
+                </i>
+            </div>
+        </nav>
+    </header>
 
-    <div id="shop" class="page">
-        <h2 style="text-align: center;">All Luxury Collections</h2>
-        <div class="grid" id="full-grid"></div>
-    </div>
-
-    <div id="login" class="page">
-        <div class="auth-container">
-            <i class="fas fa-user-circle" style="font-size: 50px; color: var(--primary); margin-bottom: 15px;"></i>
-            <h2>Welcome Back</h2>
-            <p>Login to your Vyorate account</p>
-            <input type="text" class="auth-input" placeholder="Email or Mobile Number">
-            <input type="password" class="auth-input" placeholder="Password">
-            <button class="btn-prime" onclick="handleLogin()">Login</button>
-            <p style="margin-top: 15px; font-size: 13px;">Don't have an account? <span style="color: var(--accent); cursor: pointer;">Sign Up</span></p>
+    <div id="home-page" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>iPhone 15 Pro</h1>
+                <p>Titanium. So strong. So light. So Pro.</p>
+                <button class="btn-main" onclick="navigateTo('shop-page')">Order Now</button>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Latest Arrivals</h2>
+            <div class="grid" id="featured-products"></div>
         </div>
     </div>
 
-    <div id="cart" class="cart-sidebar">
+    <div id="shop-page" class="page">
+        <div class="container">
+            <h2 class="section-title">Our Full Catalog</h2>
+            <div class="grid" id="all-products"></div>
+        </div>
+    </div>
+
+    <div id="repair-page" class="page">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Certified Repair Service</h2>
+            <p style="max-width: 600px; margin: 0 auto 40px;">Broken screen? Battery issues? Our experts fix everything in under 2 hours.</p>
+            <div class="grid">
+                <div class="product-card">
+                    <div class="product-img"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Screen Replacement</h3>
+                    <p>Starting from ₹1,999</p>
+                    <button class="btn-main" style="margin-top: 10px;">Book Slot</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-img"><i class="fas fa-battery-full"></i></div>
+                    <h3>Battery Change</h3>
+                    <p>Starting from ₹999</p>
+                    <button class="btn-main" style="margin-top: 10px;">Book Slot</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-page" class="page">
+        <div class="container" style="max-width: 400px; background: white; padding: 40px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <h2 style="margin-bottom: 20px;">Sign In</h2>
+            <input type="email" placeholder="Email Address" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <input type="password" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; outline: none;">
+            <button class="btn-main" style="width: 100%;" onclick="alert('Logged in Successfully!')">Login to Vyorate</button>
+            <p style="margin-top: 20px; text-align: center; font-size: 14px; color: #666;">New here? <a href="#" style="color: var(--primary);">Create Account</a></p>
+        </div>
+    </div>
+
+    <div id="cart-panel" class="cart-panel">
         <div class="cart-header">
-            <h3>Your Shopping Bag</h3>
-            <i class="fas fa-times" style="cursor: pointer;" onclick="toggleCart()"></i>
+            <h3>Your Bag</h3>
+            <i class="fas fa-times" style="font-size: 24px; cursor: pointer;" onclick="toggleCart()"></i>
         </div>
-        <div id="cart-items" style="margin-top: 20px;">
-            <p style="text-align: center; color: #999;">Your bag is empty.</p>
+        <div id="cart-items" style="flex: 1; overflow-y: auto;">
+            <p style="color: #999; text-align: center;">No items yet.</p>
         </div>
-        <div style="position: absolute; bottom: 30px; width: 83%;">
-            <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px;">
-                <span>Total:</span>
+        <div style="padding-top: 20px; border-top: 1px solid #eee;">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 20px; margin-bottom: 20px;">
+                <span>Total</span>
                 <span id="cart-total">₹ 0</span>
             </div>
-            <button class="btn-prime" onclick="alert('Proceeding to Secure Checkout...')">Checkout Now</button>
+            <button class="btn-main" style="width: 100%;" onclick="alert('Checkout integration requires a payment gateway.')">Checkout</button>
         </div>
     </div>
 
     <footer>
-        <div class="footer-grid">
-            <div>
-                <h4>About Vyorate</h4>
-                <p>We provide the most premium and exclusive fashion trends across the globe.</p>
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="logo">VYORATE</div>
+                <p>The next generation of mobile shopping. Premium products, unmatched service.</p>
             </div>
-            <div>
-                <h4>Customer Care</h4>
-                <p>Shipping Policy</p>
-                <p>Returns & Refunds</p>
-                <p>Track Order</p>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <p>Smartphones<br>Accessories<br>Refurbished<br>Repair Service</p>
             </div>
-            <div>
-                <h4>Contact Us</h4>
-                <p><i class="fas fa-phone"></i> +91 99999-XXXXX</p>
-                <p><i class="fas fa-envelope"></i> support@vyorate.com</p>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <p>Help Center<br>Track Order<br>Terms of Service<br>Privacy Policy</p>
             </div>
         </div>
-        <p style="text-align: center; margin-top: 40px; border-top: 1px solid #222; padding-top: 20px;">
-            &copy; 2026 Vyorate Fashion. Crafted for Excellence.
-        </p>
+        <p style="text-align: center; margin-top: 50px; opacity: 0.5; font-size: 13px;">&copy; 2026 Vyorate Fashion. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Product Database
         const products = [
-            { id: 1, name: "Luxury Emerald Suit", price: 12999, icon: "👔" },
-            { id: 2, name: "Gold Edition Watch", price: 8500, icon: "⌚" },
-            { id: 3, name: "Premium Leather Shoes", price: 4200, icon: "👞" },
-            { id: 4, name: "Satin Evening Gown", price: 15000, icon: "👗" },
-            { id: 5, name: "Designer Sunglasses", price: 2500, icon: "🕶️" },
-            { id: 6, name: "Signature Perfume", price: 3800, icon: "🧪" }
+            { id: 1, name: "iPhone 15 Pro Max", price: 149900, icon: "📱", cat: "featured" },
+            { id: 2, name: "Samsung S24 Ultra", price: 129999, icon: "📲", cat: "featured" },
+            { id: 3, name: "AirPods Pro Gen 2", price: 24900, icon: "🎧", cat: "featured" },
+            { id: 4, name: "MagSafe Leather Case", price: 4999, icon: "💼", cat: "all" },
+            { id: 5, name: "Fast Charger 45W", price: 2999, icon: "🔌", cat: "all" },
+            { id: 6, name: "OnePlus 12", price: 64999, icon: "📱", cat: "all" }
         ];
 
-        // Page Navigation Logic
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.getElementById(pageId).classList.add('active-page');
+        let cart = [];
+
+        function navigateTo(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
             window.scrollTo(0,0);
         }
 
-        // Load Products
+        function toggleCart() {
+            document.getElementById('cart-panel').classList.toggle('open');
+        }
+
         function loadProducts() {
-            const featured = document.getElementById('featured-grid');
-            const shop = document.getElementById('full-grid');
-            
+            const featuredGrid = document.getElementById('featured-products');
+            const allGrid = document.getElementById('all-products');
+
             products.forEach(p => {
-                const html = `
-                    <div class="card">
-                        <div class="card-img">${p.icon}</div>
-                        <div class="card-body">
-                            <h4>${p.name}</h4>
-                            <p class="price">₹ ${p.price.toLocaleString()}</p>
-                            <button class="btn-prime" onclick="addToCart('${p.name}', ${p.price})">Add to Bag</button>
-                        </div>
+                const card = `
+                    <div class="product-card">
+                        <div class="product-img">${p.icon}</div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">₹${p.price.toLocaleString()}</div>
+                        <button class="btn-main" onclick="addToCart(${p.id})">Add to Bag</button>
                     </div>
                 `;
-                if(p.id <= 3) featured.innerHTML += html;
-                shop.innerHTML += html;
+                if(p.cat === 'featured') featuredGrid.innerHTML += card;
+                allGrid.innerHTML += card;
             });
         }
 
-        // Cart Logic
-        let cart = [];
-        function toggleCart() {
-            document.getElementById('cart').classList.toggle('cart-active');
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            cart.push(prod);
+            updateCartUI();
+            if(!document.getElementById('cart-panel').classList.contains('open')) toggleCart();
         }
 
-        function addToCart(name, price) {
-            cart.push({name, price});
-            updateCart();
-            toggleCart();
-        }
-
-        function updateCart() {
+        function updateCartUI() {
             const container = document.getElementById('cart-items');
             const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            
             container.innerHTML = "";
             let total = 0;
-
-            cart.forEach((item, index) => {
+            
+            cart.forEach((item, idx) => {
                 total += item.price;
                 container.innerHTML += `
-                    <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #f0f0f0; padding-bottom:5px;">
+                    <div class="cart-item">
                         <div>
-                            <p style="font-size:14px; font-weight:600;">${item.name}</p>
-                            <p style="font-size:12px; color:#666;">₹ ${item.price}</p>
+                            <strong>${item.name}</strong><br>
+                            <span style="color:var(--primary)">₹${item.price.toLocaleString()}</span>
                         </div>
-                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeItem(${idx})"></i>
                     </div>
                 `;
             });
-            totalEl.innerText = "₹ " + total.toLocaleString();
+
+            totalEl.innerText = `₹${total.toLocaleString()}`;
+            countEl.innerText = cart.length;
+            if(cart.length === 0) container.innerHTML = '<p style="color: #999; text-align: center;">No items yet.</p>';
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function handleLogin() {
-            alert("Login Successful! Redirecting to Dashboard...");
-            showPage('home');
+        function removeItem(idx) {
+            cart.splice(idx, 1);
+            updateCartUI();
         }
 
         window.onload = loadProducts;
